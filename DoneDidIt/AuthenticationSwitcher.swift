@@ -16,13 +16,17 @@ struct AuthenticationSwitcher: View {
     
     var body: some View {
         Group {
-            if(authenticationModel.session != nil) {
-                NavigationStack {
-                    HomeView()
-                }
+            if(authenticationModel.initializingSession) {
+                SplashScreen()
             } else {
-                NavigationStack {
-                    LandingView()
+                if(authenticationModel.session != nil) {
+                    NavigationStack {
+                        HomeView()
+                    }
+                } else {
+                    NavigationStack {
+                        LandingView()
+                    }
                 }
             }
         }.onAppear(perform: attachAuthenticationListener)

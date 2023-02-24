@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct HomeView: View {
+    @EnvironmentObject var authenticationModel: AuthenticationModel
+    
     var body: some View {
-        Text("Home View")
+        Button(action: { authenticationModel.signOut() }) {
+            Text("Sign Out")
+        }
     }
 }

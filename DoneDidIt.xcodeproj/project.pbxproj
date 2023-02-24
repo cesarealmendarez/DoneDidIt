@@ -18,6 +18,11 @@
 		EBE944C129A86B78006FE938 /* AuthenticationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE944C029A86B78006FE938 /* AuthenticationModel.swift */; };
 		EBE944C329A86CED006FE938 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE944C229A86CED006FE938 /* LandingView.swift */; };
 		EBE944C529A86D02006FE938 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE944C429A86D02006FE938 /* HomeView.swift */; };
+		EBE944C729A8713B006FE938 /* RequestSMSCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE944C629A8713B006FE938 /* RequestSMSCodeView.swift */; };
+		EBE944C929A872A0006FE938 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE944C829A872A0006FE938 /* Utilities.swift */; };
+		EBE944CB29A8754A006FE938 /* VerifySMSCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE944CA29A8754A006FE938 /* VerifySMSCodeView.swift */; };
+		EBE944CD29A87E4A006FE938 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE944CC29A87E4A006FE938 /* SplashScreen.swift */; };
+		EBE944D129A88233006FE938 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE944D029A88233006FE938 /* ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +37,11 @@
 		EBE944C029A86B78006FE938 /* AuthenticationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationModel.swift; sourceTree = "<group>"; };
 		EBE944C229A86CED006FE938 /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
 		EBE944C429A86D02006FE938 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		EBE944C629A8713B006FE938 /* RequestSMSCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestSMSCodeView.swift; sourceTree = "<group>"; };
+		EBE944C829A872A0006FE938 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		EBE944CA29A8754A006FE938 /* VerifySMSCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifySMSCodeView.swift; sourceTree = "<group>"; };
+		EBE944CC29A87E4A006FE938 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		EBE944D029A88233006FE938 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,10 +78,15 @@
 			isa = PBXGroup;
 			children = (
 				EB3D30C329A866A70046C121 /* DoneDidIt.entitlements */,
-				EB878C9429A8551300958633 /* DoneDidItApp.swift */,
+				EBE944C829A872A0006FE938 /* Utilities.swift */,
 				EBE944C029A86B78006FE938 /* AuthenticationModel.swift */,
+				EBE944D029A88233006FE938 /* ViewModel.swift */,
+				EB878C9429A8551300958633 /* DoneDidItApp.swift */,
 				EB878CAC29A8603F00958633 /* AuthenticationSwitcher.swift */,
+				EBE944CC29A87E4A006FE938 /* SplashScreen.swift */,
 				EBE944C229A86CED006FE938 /* LandingView.swift */,
+				EBE944C629A8713B006FE938 /* RequestSMSCodeView.swift */,
+				EBE944CA29A8754A006FE938 /* VerifySMSCodeView.swift */,
 				EBE944C429A86D02006FE938 /* HomeView.swift */,
 				EB878C9829A8551600958633 /* Assets.xcassets */,
 				EB878CA229A8578500958633 /* Info.plist */,
@@ -168,11 +183,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBE944D129A88233006FE938 /* ViewModel.swift in Sources */,
+				EBE944CD29A87E4A006FE938 /* SplashScreen.swift in Sources */,
+				EBE944CB29A8754A006FE938 /* VerifySMSCodeView.swift in Sources */,
 				EBE944C329A86CED006FE938 /* LandingView.swift in Sources */,
 				EBE944C129A86B78006FE938 /* AuthenticationModel.swift in Sources */,
+				EBE944C929A872A0006FE938 /* Utilities.swift in Sources */,
 				EB878C9529A8551300958633 /* DoneDidItApp.swift in Sources */,
 				EBE944C529A86D02006FE938 /* HomeView.swift in Sources */,
 				EB878CAD29A8603F00958633 /* AuthenticationSwitcher.swift in Sources */,
+				EBE944C729A8713B006FE938 /* RequestSMSCodeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -29,6 +29,7 @@ class AuthenticationModel: ObservableObject {
     var authenticationVerificationID: String?
     
     @Published var session: User? { didSet { self.authenticationDidChange.send(self) } }
+    @Published var initializingSession: Bool = true
     
     func attachAuthenticationListener() {
         authenticationHandle = Auth.auth().addStateDidChangeListener { auth, user in
@@ -38,10 +39,12 @@ class AuthenticationModel: ObservableObject {
                         print("\(error)")
                     } else {
                         self.session = User(userID: userDocument!.documentID, userDisplayName: userDocument!.data()!["userDisplayName"] as! String, userDisplayImage: "")
+                        self.initializingSession = false
                     }
                 }
             } else {
                 self.session = nil
+                self.initializingSession = false
             }
         }
     }
