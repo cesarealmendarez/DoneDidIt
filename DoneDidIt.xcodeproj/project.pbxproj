@@ -8,23 +8,30 @@
 
 /* Begin PBXBuildFile section */
 		EB878C9529A8551300958633 /* DoneDidItApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB878C9429A8551300958633 /* DoneDidItApp.swift */; };
-		EB878C9729A8551300958633 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB878C9629A8551300958633 /* ContentView.swift */; };
 		EB878C9929A8551600958633 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB878C9829A8551600958633 /* Assets.xcassets */; };
 		EB878C9C29A8551600958633 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB878C9B29A8551600958633 /* Preview Assets.xcassets */; };
 		EB878CA429A8587300958633 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB878CA329A8587300958633 /* GoogleService-Info.plist */; };
 		EB878CA729A85AB500958633 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = EB878CA629A85AB500958633 /* FirebaseAuth */; };
 		EB878CA929A85AB600958633 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = EB878CA829A85AB600958633 /* FirebaseFirestore */; };
 		EB878CAB29A85AB600958633 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = EB878CAA29A85AB600958633 /* FirebaseStorage */; };
+		EB878CAD29A8603F00958633 /* AuthenticationSwitcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB878CAC29A8603F00958633 /* AuthenticationSwitcher.swift */; };
+		EBE944C129A86B78006FE938 /* AuthenticationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE944C029A86B78006FE938 /* AuthenticationModel.swift */; };
+		EBE944C329A86CED006FE938 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE944C229A86CED006FE938 /* LandingView.swift */; };
+		EBE944C529A86D02006FE938 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE944C429A86D02006FE938 /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EB3D30C329A866A70046C121 /* DoneDidIt.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DoneDidIt.entitlements; sourceTree = "<group>"; };
 		EB878C9129A8551300958633 /* DoneDidIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoneDidIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB878C9429A8551300958633 /* DoneDidItApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneDidItApp.swift; sourceTree = "<group>"; };
-		EB878C9629A8551300958633 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		EB878C9829A8551600958633 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EB878C9B29A8551600958633 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		EB878CA229A8578500958633 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		EB878CA329A8587300958633 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EB878CAC29A8603F00958633 /* AuthenticationSwitcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationSwitcher.swift; sourceTree = "<group>"; };
+		EBE944C029A86B78006FE938 /* AuthenticationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationModel.swift; sourceTree = "<group>"; };
+		EBE944C229A86CED006FE938 /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
+		EBE944C429A86D02006FE938 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,11 +67,15 @@
 		EB878C9329A8551300958633 /* DoneDidIt */ = {
 			isa = PBXGroup;
 			children = (
-				EB878CA329A8587300958633 /* GoogleService-Info.plist */,
-				EB878CA229A8578500958633 /* Info.plist */,
+				EB3D30C329A866A70046C121 /* DoneDidIt.entitlements */,
 				EB878C9429A8551300958633 /* DoneDidItApp.swift */,
-				EB878C9629A8551300958633 /* ContentView.swift */,
+				EBE944C029A86B78006FE938 /* AuthenticationModel.swift */,
+				EB878CAC29A8603F00958633 /* AuthenticationSwitcher.swift */,
+				EBE944C229A86CED006FE938 /* LandingView.swift */,
+				EBE944C429A86D02006FE938 /* HomeView.swift */,
 				EB878C9829A8551600958633 /* Assets.xcassets */,
+				EB878CA229A8578500958633 /* Info.plist */,
+				EB878CA329A8587300958633 /* GoogleService-Info.plist */,
 				EB878C9A29A8551600958633 /* Preview Content */,
 			);
 			path = DoneDidIt;
@@ -157,8 +168,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB878C9729A8551300958633 /* ContentView.swift in Sources */,
+				EBE944C329A86CED006FE938 /* LandingView.swift in Sources */,
+				EBE944C129A86B78006FE938 /* AuthenticationModel.swift in Sources */,
 				EB878C9529A8551300958633 /* DoneDidItApp.swift in Sources */,
+				EBE944C529A86D02006FE938 /* HomeView.swift in Sources */,
+				EB878CAD29A8603F00958633 /* AuthenticationSwitcher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +298,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = DoneDidIt/DoneDidIt.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DoneDidIt/Preview Content\"";
@@ -321,6 +336,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = DoneDidIt/DoneDidIt.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"DoneDidIt/Preview Content\"";
