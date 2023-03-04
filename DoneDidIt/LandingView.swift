@@ -7,12 +7,6 @@
 
 import SwiftUI
 
-struct DummyView: View {
-    var body: some View {
-        VStack {  }
-    }
-}
-
 struct LandingView: View {
     var body: some View {
         VStack(alignment: .center, spacing: 35) {

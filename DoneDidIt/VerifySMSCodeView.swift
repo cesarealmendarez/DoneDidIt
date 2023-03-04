@@ -19,50 +19,71 @@ struct VerifySMSCodeView: View {
     @FocusState var verificationSMSCodeTextFieldFocused: Bool
     
     var body: some View {
-        VStack(alignment: .center, spacing: 35) {
-            Spacer()
-            
-            Image(systemName: "ellipsis.rectangle").symbolRenderingMode(.palette).foregroundStyle(.white, .pink).font(.system(size: 100))
-            
-            VStack(alignment: .center, spacing: 10) {
-                Text("We sent you an SMS Code!").foregroundColor(.white).font(.largeTitle).fontWeight(.heavy).multilineTextAlignment(.center)
-            }
+        ZStack {
+            VStack(alignment: .center, spacing: 35) {
+                Spacer()
                 
-            HStack(alignment: .center) {
-                TextField("Verification Code", text: $verificationSMSCode).padding(15).background(Color(hex: 0x171717)).cornerRadius(10).multilineTextAlignment(.center).tint(.pink)
-                    .focused($verificationSMSCodeTextFieldFocused)
-                .keyboardType(.numberPad)
-                .disabled(verifyingSMSCode)
-                .onChange(of: verificationSMSCode) { phoneNumberNewValue in
-                    verificationSMSCodeInvalid = false
-                    if verificationSMSCode.count > 6 {
-                        verificationSMSCode = String(verificationSMSCode.prefix(6))
-                    }
-                    
-                    if(verificationSMSCode.count == 6) {
-                        verificationSMSCodeTextFieldFocused = false
-                        verifyingSMSCode = true
-                        
-                        authenticationModel.verifyCode(phoneNumber: phoneNumber, verificationCode: verificationSMSCode) { success in
-                            guard success else {
-                                verifyingSMSCode = false
-                                verificationSMSCodeTextFieldFocused = true
-                                verificationSMSCodeInvalid = true
-                                return
+                Image(systemName: "ellipsis.rectangle").symbolRenderingMode(.palette).foregroundStyle(.white, .pink).font(.system(size: 100))
+                
+                VStack(alignment: .center, spacing: 10) {
+                    Text("We sent you an SMS Code!").foregroundColor(.white).font(.largeTitle).fontWeight(.heavy).multilineTextAlignment(.center)
+                } 
+                
+                HStack(alignment: .center) {
+                    TextField("Verification Code", text: $verificationSMSCode).padding(15).background(Color(hex: 0x171717)).cornerRadius(10).multilineTextAlignment(.center).tint(.pink)
+                        .focused($verificationSMSCodeTextFieldFocused)
+                        .keyboardType(.numberPad)
+                        .disabled(verifyingSMSCode)
+                        .onChange(of: verificationSMSCode) { phoneNumberNewValue in
+                            verificationSMSCodeInvalid = false
+                            if verificationSMSCode.count > 6 {
+                                verificationSMSCode = String(verificationSMSCode.prefix(6))
+                            }
+                            
+                            if(verificationSMSCode.count == 6) {
+                                verificationSMSCodeTextFieldFocused = false
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                    withAnimation {
+                                        verifyingSMSCode = true
+                                    }
+                                    
+                                    authenticationModel.verifyCode(phoneNumber: phoneNumber, verificationCode: verificationSMSCode) { success in
+                                        guard success else {
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                                withAnimation {
+                                                    verifyingSMSCode = false
+                                                }
+                                            }
+                                            verificationSMSCodeTextFieldFocused = true
+                                            verificationSMSCodeInvalid = true
+                                            return
+                                        }
+                                        
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                            withAnimation {
+                                                verifyingSMSCode = false
+                                            }
+                                        }
+                                    }
+                                }
+                                
                             }
                         }
-                    }
                 }
-            }
+                
+                if(verificationSMSCodeInvalid) {
+                    Text("This SMS Code is invalid :(").font(.callout).fontWeight(.light).foregroundColor(.red).multilineTextAlignment(.center)
+                }
+                
+                Spacer()
+            }.padding(.leading, 15).padding(.trailing, 15)
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden()
+            .onAppear{ if(verificationSMSCode.count == 0 ) { verificationSMSCodeTextFieldFocused = true } }
             
-            if(verificationSMSCodeInvalid) {
-                Text("This SMS Code is invalid :(").font(.callout).fontWeight(.light).foregroundColor(.red).multilineTextAlignment(.center)
+            if(verifyingSMSCode) {
+                LoadingView(loadingPrompt: "Verifying!")
             }
-            
-            Spacer()
-        }.padding(.leading, 15).padding(.trailing, 15)
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationBarBackButtonHidden()
-        .onAppear{ if(verificationSMSCode.count == 0 ) { verificationSMSCodeTextFieldFocused = true } }
+        }
     }
 }

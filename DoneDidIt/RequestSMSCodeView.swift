@@ -18,61 +18,77 @@ struct RequestSMSCodeView: View {
     @FocusState var phoneNumberTextFieldFocused: Bool
     
     var body: some View {
-        VStack(alignment: .center, spacing: 35) {
-            Spacer()
-            
-            Image(systemName: "phone").symbolRenderingMode(.palette).foregroundStyle(.pink, .white).font(.system(size: 100))
-            
-            VStack(alignment: .center, spacing: 10) {
-                Text("Provide your phone number below!").foregroundColor(.white).font(.largeTitle).fontWeight(.heavy).multilineTextAlignment(.center)
-            }
+        ZStack {
+            VStack(alignment: .center, spacing: 35) {
+                Spacer()
                 
-            HStack(alignment: .center) {
-                Button(action: {}) {
-                    Text("🇺🇸 +1").foregroundColor(.white)
-                }.padding(15).background(Color(hex: 0x171717)).cornerRadius(10)
+                Image(systemName: "phone").symbolRenderingMode(.palette).foregroundStyle(.pink, .white).font(.system(size: 100))
                 
-                TextField("6505551234", text: $phoneNumber).padding(15).background(Color(hex: 0x171717)).cornerRadius(10).tint(.pink)
-                .focused($phoneNumberTextFieldFocused)
-                .keyboardType(.numberPad)
-                .disabled(requestingSMSCode)
-                .onChange(of: phoneNumber) { phoneNumberNewValue in
-                    if phoneNumber.count > 10 {
-                        phoneNumber = String(phoneNumber.prefix(10))
-                    }
+                VStack(alignment: .center, spacing: 10) {
+                    Text("Provide your phone number below!").foregroundColor(.white).font(.largeTitle).fontWeight(.heavy).multilineTextAlignment(.center)
+                }
+                
+                HStack(alignment: .center) {
+                    Button(action: {}) {
+                        Text("🇺🇸 +1").foregroundColor(.white)
+                    }.padding(15).background(Color(hex: 0x171717)).cornerRadius(10)
                     
-                    if(phoneNumber.count == 10) {
-                        phoneNumberTextFieldFocused = false
-                        requestingSMSCode = true
-                        
-                        authenticationModel.requestVerificationCode(phoneNumber: "+1" + phoneNumber) { success in
-                            guard success else {
-                                requestingSMSCode = false
-                                phoneNumberTextFieldFocused = true
-                                phoneNumberInvalid = true
-                                
-                                return
+                    TextField("6505551234", text: $phoneNumber).padding(15).background(Color(hex: 0x171717)).cornerRadius(10).tint(.pink)
+                        .focused($phoneNumberTextFieldFocused)
+                        .keyboardType(.numberPad)
+                        .disabled(requestingSMSCode)
+                        .onChange(of: phoneNumber) { phoneNumberNewValue in
+                            phoneNumberInvalid = false
+                            if phoneNumber.count > 10 {
+                                phoneNumber = String(phoneNumber.prefix(10))
                             }
                             
-                            DispatchQueue.main.async {
-                                navigateToVerifySMSCodeView = true
+                            if(phoneNumber.count == 10) {
+                                phoneNumberTextFieldFocused = false
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                    withAnimation {
+                                        requestingSMSCode = true
+                                    }
+                                }
+                                
+                                authenticationModel.requestVerificationCode(phoneNumber: "+1" + phoneNumber) { success in
+                                    guard success else {
+                                        withAnimation {
+                                            requestingSMSCode = false
+                                        }
+                                        phoneNumberTextFieldFocused = true
+                                        phoneNumberInvalid = true
+                                        
+                                        return
+                                    }
+                                    
+                                    DispatchQueue.main.async {
+                                        withAnimation {
+                                            requestingSMSCode = false
+                                        }
+                                        navigateToVerifySMSCodeView = true
+                                    }
+                                }
                             }
                         }
-                    }
                 }
+                
+                if(phoneNumberInvalid) {
+                    Text("Something went wrong :(").font(.callout).fontWeight(.light).foregroundColor(.red).multilineTextAlignment(.center)
+                }
+                
+                Spacer()
+            }.padding(.leading, 15).padding(.trailing, 15)
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden()
+            .onAppear{ if(phoneNumber.count == 0 ) { phoneNumberTextFieldFocused = true } }
+            .navigationDestination(isPresented: $navigateToVerifySMSCodeView) {
+                VerifySMSCodeView(phoneNumber: "+1" + phoneNumber)
             }
             
-            if(phoneNumberInvalid) {
-                Text("Something went wrong :(").font(.callout).fontWeight(.light).foregroundColor(.red).multilineTextAlignment(.center)
+            if(requestingSMSCode) {
+                LoadingView(loadingPrompt: "Sending your SMS code!")
             }
-            
-            Spacer()
-        }.padding(.leading, 15).padding(.trailing, 15)
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationBarBackButtonHidden()
-        .onAppear{ if(phoneNumber.count == 0 ) { phoneNumberTextFieldFocused = true } }
-        .navigationDestination(isPresented: $navigateToVerifySMSCodeView) {
-            VerifySMSCodeView(phoneNumber: "+1" + phoneNumber)
         }
     }
 }

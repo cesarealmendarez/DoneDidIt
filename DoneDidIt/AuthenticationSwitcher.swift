@@ -21,7 +21,7 @@ struct AuthenticationSwitcher: View {
             } else {
                 if(authenticationModel.session != nil) {
                     NavigationStack {
-                        HomeView()
+                        HomeView(viewModel: ViewModel(userID: authenticationModel.session!.userID))
                     }
                 } else {
                     NavigationStack {
